@@ -3,7 +3,7 @@ package kr.hansigan;
 import java.util.List;
 
 public class Class {
-    private Integer no; //No.
+    private Integer id; //No.
     private String code; //과목코드
     private String title; //교과목명
     private String part; //분반
@@ -22,11 +22,11 @@ public class Class {
     private String evaluation; //성적평가
     private Boolean isEnglish; //영어강의
 
-    public Class(Integer no, String code, String title, String part, String classification,
+    public Class(Integer id, String code, String title, String part, String classification,
                  Integer hak, Integer gang, Integer sil, Integer seol, String department,
                  Integer grade, String prof, Integer capacity, List<String> time, List<String> pgrade,
                  Boolean isGradeLimit, String evaluation, Boolean isEnglish) {
-        this.no = no;
+        this.id = id;
         this.code = code;
         this.title = title;
         this.part = part;
@@ -49,7 +49,7 @@ public class Class {
     //String -> Class
     public Class(List<String> tmp) {
         int idx = 0;
-        this.no = tmp.get(idx++).charAt(0) - '0';
+        this.id = Math.round(Float.parseFloat(tmp.get(idx++)));
         this.code = tmp.get(idx++);
         this.title = tmp.get(idx++);
         this.part = tmp.get(idx++);
@@ -61,7 +61,7 @@ public class Class {
         this.department = tmp.get(idx++);
         this.grade = tmp.get(idx++).charAt(0) - '0';
         this.prof = tmp.get(idx++).equals("false") ? "" : tmp.get(11);
-        this.capacity = tmp.get(idx++).charAt(0) - '0';
+        this.capacity = Math.round(Float.parseFloat(tmp.get(idx++)));
         this.time = convertString2List(tmp.get(idx++));
         this.pgrade = convertString2List(tmp.get(idx++));
         this.isGradeLimit = tmp.get(idx++).charAt(0) - '0' != 0;
@@ -74,12 +74,12 @@ public class Class {
         return List.of(times);
     }
 
-    public Integer getNo() {
-        return no;
+    public Integer getId() {
+        return id;
     }
 
-    public void setNo(Integer no) {
-        this.no = no;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getCode() {
@@ -222,7 +222,7 @@ public class Class {
     public String toString() {
         StringBuilder ret = new StringBuilder();
         ret.append("[");
-        ret.append(no).append(", ");
+        ret.append(id).append(", ");
         ret.append(code).append(", ");
         ret.append(title).append(", ");
         ret.append(part).append(", ");
